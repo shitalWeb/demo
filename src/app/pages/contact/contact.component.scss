@@ -1,0 +1,25 @@
+.home {
+    &-wrapper {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &-box {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+
+        .card {
+                
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    }
+
+}
