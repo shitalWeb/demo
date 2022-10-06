@@ -14,7 +14,6 @@ export class RegisterComponent implements OnInit {
   toasts: ToastInfo[] = [];
   submitted = false;
   registerForm: FormGroup = new FormGroup({
-  
     email: new FormControl(''),
     password: new FormControl(''),
     confirmPassword: new FormControl('')
@@ -50,7 +49,6 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    
     
     this.userService.sinUpUser(this.registerForm.value).then((result:any) => {
         if(result){

@@ -42,11 +42,8 @@ register(){
     if (this.loginForm.invalid) {
       return;
     }
-
-   
-
+    
     this.userService.logInUser(this.loginForm.value).then((result:any) => {
-        console.log(result);
         if(result){
           this.userService.setLoginStatus(result.id);
           this.router.navigate(['/contact']);
