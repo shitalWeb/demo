@@ -1,9 +1,10 @@
 import { Component,OnInit } from '@angular/core';
 import {FormGroup,FormControl,Validators,FormArray,FormBuilder,AbstractControl} from '@angular/forms';
 import Validation from '../../utils/validation';
-import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';
 import { ToastInfo } from 'src/app/interface/toast';
+import { UserService } from 'src/app/services/user/user.service';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(''),
     confirmPassword: new FormControl('')
   });
-  constructor(private formBuilder: FormBuilder,private router:Router) {}
+  constructor(private formBuilder: FormBuilder,private router:Router,private userService:UserService) {}
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group(
       {
@@ -49,23 +50,19 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find(
-      (user: { email: string; password: string }) =>
-        user.email.toLowerCase() === this.registerForm.controls['email'].value.trim()
-    );
-    if (user)
-      return alert('Already dxist')
-      // this.toasts.show( 'User alrady exist!', 'Eror' ,1000);
-    const newUser = {
-      email: this.registerForm.controls['email'].value,
-      password: this.registerForm.controls['password'].value,
-      id: uuidv4(),
-    };
-    const updatedUsers = [...users, newUser];
-    localStorage.setItem('users', JSON.stringify(updatedUsers));
-    localStorage.setItem('authToken', newUser.id);
-    return this.router.navigate(['contact']);
+    
+    
+    this.userService.sinUpUser(this.registerForm.value).then((result:any) => {
+        if(result){
+          this.userService.setLoginStatus(result.id);
+          this.router.navigate(['/contact']);
+        }
+        else{
+          alert('Already exist user!')
+        }
+      })
+      .catch((error:any) => {
+      })
   }
   get f(): { [key: string]: AbstractControl } {
     return this.registerForm.controls;

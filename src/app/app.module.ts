@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
-import { AuthGuard } from './services/guards/services/auth.guard';
+import { AuthGuard } from './services/guards/auth.guard';
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent
@@ -14,7 +15,7 @@ import { AuthGuard } from './services/guards/services/auth.guard';
     AppRoutingModule,
     NgbModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

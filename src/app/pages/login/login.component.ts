@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import {FormGroup,FormControl,Validators,FormArray,FormBuilder,AbstractControl} from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  constructor(private formBuilder: FormBuilder,private router:Router) {}
+  constructor(private formBuilder: FormBuilder,private router:Router,public userService:UserService) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group(
@@ -42,17 +43,21 @@ register(){
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find(
-      (user: { email: string; password: string }) =>
-        user.email.toLowerCase() === this.loginForm.controls['email'].value.trim() &&
-        user.password === this.loginForm.controls['password'].value
-    );
-    if (!user) return  alert('Please enter valid credentials')
+   
 
-    localStorage.setItem('authToken', user.id);
-    return this.router.navigate(['/contact']);
-
+    this.userService.logInUser(this.loginForm.value).then((result:any) => {
+        console.log(result);
+        if(result){
+          this.userService.setLoginStatus(result.id);
+          this.router.navigate(['/contact']);
+        }
+        else{
+          alert('Username or password incorrect!')
+        }
+      })
+      .catch((error:any) => {
+       
+      })
   }
 
   get f(): { [key: string]: AbstractControl } {
