@@ -1,13 +1,13 @@
 <div class="home">
     <div class="home-wrapper">
       <div class="row home-box">
-        <h1>Contact </h1>
-        <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add</button>
+        <h1 class="col-md-8">Contact </h1>
+        <button class="btn btn-lg btn-outline-primary col-md-2" (click)="open(content)">Add</button>
         <div class="card col-xs-12 col-sm-12 col-md-12 col-md-offset-2 col-sm-offset-1">
             <table class="table table-striped">
                 <thead>
                 <tr>
-                  <th scope="col">#</th>
+                  <th scope="col">No</th>
                   <th scope="col" sortable="name">Name</th>
                   <th scope="col" sortable="area">Email</th>
                   <th scope="col" sortable="population">Phone Number</th>
@@ -24,7 +24,7 @@
                   <td><img  height="30" width="100" src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg"/></td>
                   <td>
                     <button class="btn btn-primary" type="button" (click)="editData(contact,content)">Edit</button> 
-                    <button type="button" class="btn btn-outline-dark" (click)="deleteData(contact,delete);">Delete</button>
+                    <button type="button" class=" del-btn btn btn-outline-dark" (click)="deleteData(contact,delete);">Delete</button>
                   </td>
                 </tr>
                 </tbody>
@@ -87,18 +87,21 @@
             </div>
           <div class="form-group">
               <label>Upload photo</label>
-              <img height="100" width="100"
-              class="w-full h-full absolute top-0 left-0 object-contain object-center"
-              [src]="f['profileimg'].value || '/assets/images/user-profile.png'"
-              alt=""
-            />
-            <input
-              (change)="uploadImage($event)"
-              formControlName="profileimg"
-              name="profileimg"
-              [ngClass]="{ 'is-invalid': submitted && f['profileimg'].errors }"
-              type="file"
-            />
+              <div class="file-input">
+                <img height="100" width="100" for="profileimg"
+                class="w-full h-full absolute top-0 left-0 object-contain object-center"
+                [src]="f['profileimg'].value || 'http://www.gravatar.com/avatar'"
+                alt=""
+              />
+              <input
+                (change)="uploadImage($event)"
+                formControlName="profileimg"
+                name="profileimg"
+                id="profileimg"
+                [ngClass]="{ 'is-invalid': submitted && f['profileimg'].errors }"
+                type="file"
+              />
+              </div>
 
               <div *ngIf="submitted && f['profileimg'].errors"
                   class="invalid-feedback"
@@ -111,7 +114,7 @@
             </div>
         </div>
         <div class="auth-submit-btn">
-          <button class="btn btn-primary" type="submit">Submit</button> 
+          <button class="btn btn-primary btn-submit-dialog" type="submit">Submit</button> 
         </div>
       </form>
     </div>

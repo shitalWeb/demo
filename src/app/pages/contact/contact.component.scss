@@ -2,8 +2,9 @@
     &-wrapper {
         height: 100vh;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
+        padding: 20px 30px;
     }
 
     &-box {
@@ -22,4 +23,28 @@
         }
     }
 
+}
+.del-btn{
+    margin-left:10px ;
+}
+.file-input{
+    position: relative;
+    margin-bottom: 15px;
+    input{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100px;
+        width: 100px;
+        opacity: 0;
+        cursor: pointer;
+    }
+    img{
+        height: 100px;
+        width: 100px;
+    }
+}
+.btn-submit-dialog{
+    position: absolute;
+    bottom: -55px;
 }

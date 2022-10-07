@@ -21,6 +21,7 @@ export class ContactComponent implements OnInit {
   });
   edit_id='';
   delete_id='';
+  
   constructor(private modalService: NgbModal,private formBuilder: FormBuilder,private userService:UserService,private managedataService:ManagedataService) { }
 
   ngOnInit(): void {
