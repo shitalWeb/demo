@@ -48,6 +48,7 @@ export class UserService {
   }
 
   async addContact(contactdata:any) {
+    console.log('2')
    this.managedataService.setContactdata(contactdata);
    return this.managedataService.getContactData(this.LoginStatus());
 

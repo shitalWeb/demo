@@ -34,18 +34,22 @@ export class ContactComponent implements OnInit {
           Validators.minLength(10),
           Validators.maxLength(10),
         ],],
-        profileimg: ['', [Validators.required]] 
+        profileimg: [''] 
       }
     );
     this.getContactData()
   }
 
   onSubmit(){
+    // console.log(this.contactForm.controls['profileimg'].value)
+    // console.log(this.contactForm.value.profileimg)
+    // return
     this.submitted = true;
     if (this.contactForm.invalid) {
       return;
     }
-    console.log(this.contactForm.value)
+    console.log(this.contactForm.invalid)
+    this.contactForm.value.profileimg=this.contactForm.controls['profileimg'].value;
     if(this.edit_id!==""){
       this.userService.editContact({...this.contactForm.value,id:this.edit_id,userid:this.userService.LoginStatus()}).then((result:any) => {
         if(result){
@@ -57,7 +61,9 @@ export class ContactComponent implements OnInit {
       })
     }
     else{
+      console.log('1')
       this.userService.addContact({...this.contactForm.value,id:uuidv4(),userid:this.userService.LoginStatus()}).then((result:any) => {
+        console.log(result)
           if(result){
             this.getContactData();
             this.closePopup();
@@ -74,6 +80,7 @@ export class ContactComponent implements OnInit {
 
   getContactData(){
     this.contactlist = this.managedataService.getContactData(this.userService.LoginStatus());
+    console.log(this.contactlist)
   }
 
   editData(contactData:any,modelContent:any){
@@ -109,8 +116,10 @@ uploadImage(e: any) {
       const file = files[0];
       const reader = new FileReader();
       reader.onloadend = () => {
-      this.contactForm.patchValue({profileimg:reader.result as string});
-      this.contactForm.setValue({profileimg:reader.result as string});
+      // this.contactForm.patchValue({profileimg:reader.result as string});
+      console.log(reader.result)
+      // this.contactForm.setValue({profileimg:reader.result as string});
+      this.contactForm.controls['profileimg'].setValue(reader.result as string);
       console.log(this.contactForm.value)
       };
       reader.readAsDataURL(file);

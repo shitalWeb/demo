@@ -21,7 +21,8 @@
                   <td> {{contact.name}}</td>
                   <td>{{contact.email}}</td>
                   <td>{{contact.phoneno}}</td>
-                  <td><img  height="30" width="100" src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg"/></td>
+                  <td><img  height="30" width="100"  [src]="'contact.profileimg' || '/assets/Image/user.png'"
+                    onError="this.src='/assets/Image/user.png'"/></td>
                   <td>
                     <button class="btn btn-primary" type="button" (click)="editData(contact,content)">Edit</button> 
                     <button type="button" class=" del-btn btn btn-outline-dark" (click)="deleteData(contact,delete);">Delete</button>
@@ -90,7 +91,8 @@
               <div class="file-input">
                 <img height="100" width="100" for="profileimg"
                 class="w-full h-full absolute top-0 left-0 object-contain object-center"
-                [src]="f['profileimg'].value || 'http://www.gravatar.com/avatar'"
+                [src]="f['profileimg'].value || '/assets/Image/user.png'"
+                onError="this.src='/assets/Image/user.png'"
                 alt=""
               />
               <input
