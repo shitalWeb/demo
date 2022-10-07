@@ -12,15 +12,20 @@
                   <th scope="col" sortable="area">Email</th>
                   <th scope="col" sortable="population">Phone Number</th>
                   <th scope="col" sortable="population">Profile pic</th>
+                  <th scope="col" >Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td> shital</td>
-                  <td>shital.jadani@gmail.com</td>
-                  <td>9913140909</td>
+                <tr *ngFor="let contact of contactlist; let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td> {{contact.name}}</td>
+                  <td>{{contact.email}}</td>
+                  <td>{{contact.phoneno}}</td>
                   <td><img  height="30" width="100" src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg"/></td>
+                  <td>
+                    <button class="btn btn-primary" type="button" (click)="editData(contact,content)">Edit</button> 
+                    <button type="button" class="btn btn-outline-dark" (click)="deleteData(contact,delete);">Delete</button>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -32,7 +37,7 @@
   <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      <button type="button" class="btn-close" aria-label="Close" (click)="closePopup()"></button>
     </div>
     <div class="modal-body">
       <form class="auth-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
@@ -41,13 +46,12 @@
             <label>Name</label>
             <input
               type="text"
-              formControlName="email"
+              formControlName="name"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+              [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
             />
-            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-              <div *ngIf="f['email'].errors['required']">Email is required</div>
-              <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+            <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+              <div *ngIf="f['name'].errors['required']">name is required</div>
             </div>
           </div>
           <div class="form-group">
@@ -66,38 +70,43 @@
           <div class="form-group">
               <label>Phone Number</label>
               <input
-                type="password"
-                formControlName="password"
+                type="phoneno"
+                formControlName="phoneno"
                 class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+                [ngClass]="{ 'is-invalid': submitted && f['phoneno'].errors }"
               />
-              <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                <div *ngIf="f['password'].errors['required']">Password is required</div>
-                <div *ngIf="f['password'].errors['minlength']">
-                  Password must be at least 6 characters
+              <div *ngIf="submitted && f['phoneno'].errors" class="invalid-feedback">
+                <div *ngIf="f['phoneno'].errors['required']">phoneno is required</div>
+                <div *ngIf="f['phoneno'].errors['minlength']">
+                  phoneno must be at least 10 characters
                 </div>
-                <div *ngIf="f['password'].errors['maxlength']">
-                  Username must not exceed 40 characters
+                <div *ngIf="f['phoneno'].errors['maxlength']">
+                  phoneno must be at least 10 characters
                 </div>
               </div>
             </div>
           <div class="form-group">
-              <label>Confirm Password</label>
-              <input
-                type="password"
-                formControlName="confirmPassword"
-                class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
-              />
-              <div *ngIf="submitted && f['confirmPassword'].errors"
+              <label>Upload photo</label>
+              <img height="100" width="100"
+              class="w-full h-full absolute top-0 left-0 object-contain object-center"
+              [src]="f['profileimg'].value || '/assets/images/user-profile.png'"
+              alt=""
+            />
+            <input
+              (change)="uploadImage($event)"
+              formControlName="profileimg"
+              name="profileimg"
+              [ngClass]="{ 'is-invalid': submitted && f['profileimg'].errors }"
+              type="file"
+            />
+
+              <div *ngIf="submitted && f['profileimg'].errors"
                   class="invalid-feedback"
               >
-                  <div *ngIf="f['confirmPassword'].errors['required']">
-                  Confirm Password is required
+                  <div *ngIf="f['profileimg'].errors['required']">
+                  Profile Pic is required
                   </div>
-                  <div *ngIf="f['confirmPassword'].errors['matching']">
-                  Confirm Password does not match
-                  </div>
+                  
               </div>
             </div>
         </div>
@@ -107,6 +116,20 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+      <button type="button" class="btn btn-outline-dark" (click)="closePopup();">Cancel</button>
+    </div>
+  </ng-template>
+
+  <ng-template #delete let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Delete Profile</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="closePopup()"></button>
+    </div>
+    <div class="modal-body">
+      Are you sure you want to delete this contect?
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" type="button" (click)="deleteContact()">Delete</button> 
+      <button type="button" class="btn btn-outline-dark" (click)="closePopup();">Cancel</button>
     </div>
   </ng-template>

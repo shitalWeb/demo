@@ -7,11 +7,35 @@ export class ManagedataService {
 
   constructor() { }
 
-  setAuthdata(data:any){
-    localStorage.setItem('users', JSON.stringify(data));
+  getAppdata() {
+    return JSON.parse(localStorage.getItem('appData') || '{}');
   }
-  
-  getAuthdata(){
-    return JSON.parse(localStorage.getItem('users') || '[]');
+
+  getAuthdata() {
+    return this.getAppdata().users || [];
   }
+
+  getContactData(userId: string) {
+    return (this.getAppdata().contacts || []).filter((contact: any) => {
+      return contact.userid === userId
+    })
+  }
+
+  setAuthdata(data: any) {
+    const appData = this.getAppdata();
+    localStorage.setItem('appData', JSON.stringify({ ...appData, users: data }));
+  }
+  setContactdata(contactData: any) {
+    const appData = this.getAppdata();
+    localStorage.setItem('appData', JSON.stringify({ ...appData, contacts: [...(appData.contacts || []), contactData] }));
+  }
+  editContactdata(contactData: any) {
+    const appData = this.getAppdata();
+    localStorage.setItem('appData', JSON.stringify({ ...appData, contacts: [contactData] }));
+  }
+  deleteContactdata(contactData: any) {
+    const appData = this.getAppdata();
+    localStorage.setItem('appData', JSON.stringify({ ...appData, contacts: [contactData] }));
+  }
+
 }
