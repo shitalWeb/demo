@@ -52,8 +52,7 @@ export class RegisterComponent implements OnInit {
     
     this.userService.sinUpUser(this.registerForm.value).then((result:any) => {
         if(result){
-          this.userService.setLoginStatus(result.id);
-          this.router.navigate(['/contact']);
+          this.router.navigate(['login']);
         }
         else{
           alert('Already exist user!')

@@ -1,0 +1,61 @@
+<div class="header">
+    <div class="header-wrapper">
+        <div class="header-content">
+            <h4 class="offcanvas-title" id="offcanvas-basic-title" >AdminKit</h4>
+            <i class="fa fa-bars"(click)="open(content)"></i>
+        </div>
+        <div>
+            <button type="button" class="btn btn-outline-secondary" ngbPopover="You see, I show up on hover!" triggers="mouseenter:mouseleave" popoverTitle="Pop title">
+                Shital Jasani
+              </button>
+            
+        </div>
+    </div>
+</div>
+
+
+<div class="side-nav">
+    <ng-template #content let-offcanvas class="side-wrapper">
+        
+        <div class="offcanvas-header">
+            <h4 class="offcanvas-title" id="offcanvas-basic-title">AdminKit</h4>
+            <i class="fa fa-bars"  (click)="offcanvas.dismiss('Cross click')"></i>
+            <!-- <button type="button" class="btn-close" aria-label="Close"></button> -->
+        </div>
+        <div class="offcanvas-body">
+            <ul>
+            <li (click)="navigation('dashboard')">
+                Dashboard
+            </li>
+            <li (click)="navigation('contact')">
+                Contacts
+            </li>
+            </ul>
+        </div>
+        </ng-template>
+</div>
+
+<div class="main-content">
+    <ng-content></ng-content>
+</div>
+
+  
+<div class="footer">
+    <div class="footer-wrapper">
+        <div class="footer-content">
+            <div>
+                <span>AdminKit <span>&copy;</span></span>
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        About Us
+                    </li>
+                    <li (click)="navigation('contact')">
+                        Contact Us
+                    </li>
+                </ul>
+            </div>
+        </div>  
+    </div>
+</div>

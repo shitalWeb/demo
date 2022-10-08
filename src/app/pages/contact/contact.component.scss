@@ -1,6 +1,5 @@
 .home {
     &-wrapper {
-        height: 100vh;
         display: flex;
         align-items: flex-start;
         justify-content: center;
@@ -11,7 +10,7 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-
+        position: relative;
         .card {
                 
         }
@@ -20,6 +19,11 @@
             text-align: center;
             font-weight: bold;
             margin-bottom: 20px;
+        }
+        .btn-add{
+            position: absolute;
+            top:0 ;
+            right: 0;
         }
     }
 

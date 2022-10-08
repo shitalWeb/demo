@@ -2,3 +2,31 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+.offcanvas{
+    width: 230px!important;
+    background-color: #1E1E2D;  
+    color:#ffffff;
+    .offcanvas-header{
+        border:1px solid #2D2D43;
+        i{
+            font-size: 24px;
+            cursor: pointer;
+        }
+    }
+   .offcanvas-body{
+    padding: 0px;
+     ul{
+        list-style: none;
+        margin: 0;
+        padding: 0px;
+        li{
+            padding: 15px 20px;
+            cursor: pointer;
+        }
+        li:hover{
+            background-color: #2C2C41;
+        }
+    }
+   }
+}
