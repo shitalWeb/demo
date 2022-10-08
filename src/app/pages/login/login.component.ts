@@ -46,7 +46,7 @@ register(){
     this.userService.logInUser(this.loginForm.value).then((result:any) => {
         if(result){
           this.userService.setLoginStatus(result.id);
-          this.router.navigate(['/contact']);
+          this.router.navigate(['/dashboard']);
         }
         else{
           alert('Username or password incorrect!')

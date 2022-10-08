@@ -18,7 +18,8 @@ export class ModalsComponent implements OnInit {
   }
 
   navigation(data:string){
-    this.router.navigate([data])
+    this.router.navigate([data]);
+    this.offcanvasService.dismiss('Cross click')
   }
 
   private getDismissReason(reason: any): string {
