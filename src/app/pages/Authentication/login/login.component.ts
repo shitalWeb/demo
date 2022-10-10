@@ -43,7 +43,7 @@ register(){
       return;
     }
     
-    this.userService.logInUser(this.loginForm.value).then((result:any) => {
+    const result = this.userService.logInUser(this.loginForm.value)
         if(result){
           this.userService.setLoginStatus(result.id);
           this.router.navigate(['/dashboard']);
@@ -51,11 +51,7 @@ register(){
         else{
           alert('Username or password incorrect!')
         }
-      })
-      .catch((error:any) => {
-       
-      })
-  }
+    }
 
   get f(): { [key: string]: AbstractControl } {
     return this.loginForm.controls;
