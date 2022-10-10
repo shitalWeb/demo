@@ -10,14 +10,14 @@ import { UserService } from '../services/user/user.service';
 export class ModalsComponent implements OnInit {
   closeResult = '';
   userName="";
-  constructor(private offcanvasService: NgbOffcanvas,private router:Router,private userService: UserService) { }
+  constructor(private offCanvasService: NgbOffcanvas,private router:Router,private userService: UserService) { }
 
   ngOnInit(): void {
     this.userName=this.userService.getLoginData().email;
   }
 
   open(content:any) {
-      this.offcanvasService.open(content, { backdrop: false,backdropClass:'custome' });
+      this.offCanvasService.open(content, { backdrop: false,backdropClass:'custome' });
   }
 
   logOut(){
@@ -27,7 +27,7 @@ export class ModalsComponent implements OnInit {
 
   navigation(data:string){
     this.router.navigate([data]);
-    this.offcanvasService.dismiss('Cross click')
+    this.offCanvasService.dismiss('Cross click')
   }
 
   private getDismissReason(reason: any): string {

@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class ContactComponent implements OnInit {
   closeResult = '';
   submitted=false;
-  contactlist:any=[];
+  contactList:any=[];
   contactForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     email: new FormControl(''),
@@ -22,7 +22,7 @@ export class ContactComponent implements OnInit {
   edit_id='';
   delete_id='';
   
-  constructor(private modalService: NgbModal,private formBuilder: FormBuilder,private userService:UserService,private managedataService:ManagedataService) { }
+  constructor(private modalService: NgbModal,private formBuilder: FormBuilder,private userService:UserService,private manageDataService:ManagedataService) { }
 
   ngOnInit(): void {
     this.contactForm = this.formBuilder.group(
@@ -79,8 +79,8 @@ export class ContactComponent implements OnInit {
   }
 
   getContactData(){
-    this.contactlist = this.managedataService.getContactData(this.userService.LoginStatus());
-    console.log(this.contactlist)
+    this.contactList = this.manageDataService.getContactData(this.userService.LoginStatus());
+    console.log(this.contactList)
   }
 
   editData(contactData:any,modelContent:any){
