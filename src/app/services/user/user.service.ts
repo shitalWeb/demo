@@ -30,8 +30,7 @@ export class UserService {
    return this.cookieValue
   }
 
-  async sinUpUser(userdata:any) {
-    console.log(userdata)
+   sinUpUser(userdata:any) {
     const users = this.managedataService.getAuthdata();
     const user = users.find(
       (user: { email: string; password: string }) =>
@@ -43,7 +42,7 @@ export class UserService {
       password: userdata.password,
       id: uuidv4(),
     };
-      this.managedataService.setAuthdata([...users, newUser]);
+    this.managedataService.setAuthdata([...users, newUser]);
     return true && newUser
   }
 

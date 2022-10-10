@@ -1,5 +1,5 @@
-import { Component,OnInit } from '@angular/core';
-import {FormGroup,FormControl,Validators,FormArray,FormBuilder,AbstractControl} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder, AbstractControl } from '@angular/forms';
 import Validation from '../../../utils/validation';
 import { Router } from '@angular/router';
 import { ToastInfo } from 'src/app/interface/toast';
@@ -18,11 +18,11 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(''),
     confirmPassword: new FormControl('')
   });
-  constructor(private formBuilder: FormBuilder,private router:Router,private userService:UserService) {}
+  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) { }
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group(
       {
-        
+
         email: ['', [Validators.required, Validators.email]],
         password: [
           '',
@@ -40,26 +40,24 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  signIn(){
+  signIn() {
     this.router.navigate(['login'])
   }
-  onSubmit(){
+  onSubmit() {
     this.submitted = true;
 
     if (this.registerForm.invalid) {
       return;
     }
-    
-    this.userService.sinUpUser(this.registerForm.value).then((result:any) => {
-        if(result){
-          this.router.navigate(['login']);
-        }
-        else{
-          alert('Already exist user!')
-        }
-      })
-      .catch((error:any) => {
-      })
+
+    const result = this.userService.sinUpUser(this.registerForm.value)
+    if (result) {
+      this.router.navigate(['login']);
+    }
+    else {
+      alert('Already exist user!')
+    }
+
   }
   get f(): { [key: string]: AbstractControl } {
     return this.registerForm.controls;
