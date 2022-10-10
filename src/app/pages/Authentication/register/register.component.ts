@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import {FormGroup,FormControl,Validators,FormArray,FormBuilder,AbstractControl} from '@angular/forms';
-import Validation from '../../utils/validation';
+import Validation from '../../../utils/validation';
 import { Router } from '@angular/router';
 import { ToastInfo } from 'src/app/interface/toast';
 import { UserService } from 'src/app/services/user/user.service';
