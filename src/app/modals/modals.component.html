@@ -5,16 +5,12 @@
             <i class="fa fa-bars"(click)="open(content)"></i>
         </div>
         <div>
-
             <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-                <button type="button" class="btn btn-outline-primary" ngbDropdownToggle>Drop me</button>
+                <button type="button" class="btn " ngbDropdownToggle>{{userName}}</button>
                 <div class="dropdown-menu" ngbDropdownMenu>
                   <button ngbDropdownItem (click)="logOut()">Logout</button>
                 </div>
             </div>
-            <button type="button" class="btn btn-outline-secondary" ngbPopover="Logout"  >
-                Shital Jasani
-            </button>
         </div>
     </div>
 </div>

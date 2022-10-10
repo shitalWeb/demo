@@ -9,10 +9,11 @@ import { UserService } from '../services/user/user.service';
 })
 export class ModalsComponent implements OnInit {
   closeResult = '';
+  userName="";
   constructor(private offcanvasService: NgbOffcanvas,private router:Router,private userService: UserService) { }
 
   ngOnInit(): void {
-    
+    this.userName=this.userService.getLoginData().email;
   }
 
   open(content:any) {

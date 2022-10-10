@@ -15,6 +15,11 @@ export class UserService {
     this.cookieService.set('authtoken', value);
   }
 
+  getLoginData(){
+    const data=this.managedataService.getAuthdata().find((_:any)=>_.id == this.LoginStatus());
+    return data
+  }
+
   LoginStatus() {
     this.cookieValue = this.cookieService.get('authtoken');
    return this.cookieValue
