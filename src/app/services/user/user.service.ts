@@ -19,6 +19,11 @@ export class UserService {
     this.cookieValue = this.cookieService.get('authtoken');
    return this.cookieValue
   }
+  logOut() {
+    this.cookieValue = this.cookieService.delete('authtoken');
+    this.cookieValue = this.cookieService.get('authtoken');
+   return this.cookieValue
+  }
 
   async sinUpUser(userdata:any) {
     console.log(userdata)

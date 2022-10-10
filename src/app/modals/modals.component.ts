@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {NgbOffcanvas, OffcanvasDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from '../services/user/user.service';
 @Component({
   selector: 'app-modals',
   templateUrl: './modals.component.html',
@@ -8,13 +9,19 @@ import {NgbOffcanvas, OffcanvasDismissReasons} from '@ng-bootstrap/ng-bootstrap'
 })
 export class ModalsComponent implements OnInit {
   closeResult = '';
-  constructor(private offcanvasService: NgbOffcanvas,private router:Router) { }
+  constructor(private offcanvasService: NgbOffcanvas,private router:Router,private userService: UserService) { }
 
   ngOnInit(): void {
     
   }
+
   open(content:any) {
       this.offcanvasService.open(content, { backdrop: false,backdropClass:'custome' });
+  }
+
+  logOut(){
+    const loginData=this.userService.logOut();
+    if (!loginData) this.router.navigate(['login'])
   }
 
   navigation(data:string){
