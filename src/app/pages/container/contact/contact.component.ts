@@ -91,14 +91,12 @@ export class ContactComponent implements OnInit {
   }
 
   deleteContact(){
-    this.userService.deleteContact({...this.contactForm.value,id:this.delete_id,userid:this.userService.LoginStatus()}).then((result:any) => {
-      if(result){
+    const result = this.userService.deleteContact({...this.contactForm.value,id:this.delete_id,userid:this.userService.LoginStatus()});
+     if(result){
         this.getContactData();
         this.closeDeletePopup();
       }
-    })
-    .catch((error:any) => {
-    })
+   
   }
 
 uploadImage(e: any) {
