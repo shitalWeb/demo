@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/guards/auth.guard';
+import { UnauthGuard } from './services/guards/unauth.guard';
 const routes: Routes = [
   {
     path: '',
@@ -12,7 +13,8 @@ const routes: Routes = [
     children: [
       {path: 'login', loadChildren: () => import('./pages/Authentication/login/login.module').then(m => m.LoginModule)},
       {path: 'register', loadChildren: () => import('../app/pages/Authentication/register/register.module').then(m => m.RegisterModule)},
-    ]
+    ],
+    canActivate: [UnauthGuard]
   },
   {
     path: '',
@@ -25,5 +27,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
  }
