@@ -81,7 +81,6 @@ export class ContactComponent implements OnInit {
         this.keys = Object.keys(data[0]);
         this.dataSheet.next(data);
         for(var i=0;i<data.length;i++){
-          console.log(data[i].Name)
           const contactData={
             name:data[i].Name,
             email:data[i].Email,
