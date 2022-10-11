@@ -37,14 +37,4 @@ export class ModalsComponent implements OnInit {
     this.router.navigate([data]);
    this.close(content);
   }
-  
-  private getDismissReason(reason: any): string {
-    if (reason === OffcanvasDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === OffcanvasDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on the backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
 }

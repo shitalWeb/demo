@@ -56,7 +56,6 @@ export class RegisterComponent implements OnInit {
     else {
       alert('Already exist user!')
     }
-
   }
 
   get f(): { [key: string]: AbstractControl } {
