@@ -30,44 +30,43 @@ export class UserService {
    return this.cookieValue
   }
 
-   sinUpUser(userdata:any) {
+   sinUpUser(userData:any) {
     const users = this.managedataService.getAuthdata();
     const user = users.find(
       (user: { email: string; password: string }) =>
-        user.email.toLowerCase() === userdata.email.trim()
+        user.email.toLowerCase() === userData.email.trim()
     );
     if (user)  return false && user
     const newUser = {
-      email: userdata.email,
-      password: userdata.password,
+      email: userData.email,
+      password: userData.password,
       id: uuidv4(),
     };
     this.managedataService.setAuthdata([...users, newUser]);
     return true && newUser
   }
 
-  logInUser(userdata:any) {
+  logInUser(userData:any) {
     const users = this.managedataService.getAuthdata();
     const user = users.find(
       (user: { email: string; password: string }) =>
-        user.email.toLowerCase() === userdata.email &&
-        user.password === userdata.password
+        user.email.toLowerCase() === userData.email &&
+        user.password === userData.password
     );
      return !!user && user
   }
 
-  addContact(contactdata:any) {
-    console.log('2')
-   this.managedataService.setContactdata(contactdata);
+  addContact(contactData:any) {
+   this.managedataService.setContactdata(contactData);
    return this.managedataService.getContactData(this.LoginStatus());
 
   }
 
-  editContact(contactdata:any) {
+  editContact(contactData:any) {
     const data= this.managedataService.getAppdata().contacts||[];
     const editData = data.map((contact:any) => {
-      if (contact.id === contactdata.id) {
-        contact = contactdata;
+      if (contact.id === contactData.id) {
+        contact = contactData;
       }
       return contact;
     });
@@ -76,10 +75,9 @@ export class UserService {
 
   }
 
-  deleteContact(contactdata:any) {
+  deleteContact(contactData:any) {
     const data= this.managedataService.getAppdata().contacts||[];
-    const deleteData = data.filter((contact:any)=> contact.id!==contactdata.id);
-    console.log(deleteData);
+    const deleteData = data.filter((contact:any)=> contact.id!==contactData.id);
    this.managedataService.deleteContactdata(deleteData);
    return this.managedataService.getContactData(this.LoginStatus());
   }

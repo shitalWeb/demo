@@ -44,7 +44,6 @@ export class ModalsComponent implements OnInit {
     } else if (reason === OffcanvasDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on the backdrop';
     } else {
-      console.log('no')
       return `with: ${reason}`;
     }
   }

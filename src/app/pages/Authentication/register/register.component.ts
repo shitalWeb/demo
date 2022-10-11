@@ -43,13 +43,12 @@ export class RegisterComponent implements OnInit {
   signIn() {
     this.router.navigate(['login'])
   }
+
   onSubmit() {
     this.submitted = true;
-
     if (this.registerForm.invalid) {
       return;
     }
-
     const result = this.userService.sinUpUser(this.registerForm.value)
     if (result) {
       this.router.navigate(['login']);
@@ -59,6 +58,7 @@ export class RegisterComponent implements OnInit {
     }
 
   }
+
   get f(): { [key: string]: AbstractControl } {
     return this.registerForm.controls;
   }

@@ -1,5 +1,5 @@
-import { Component,OnInit } from '@angular/core';
-import {FormGroup,FormControl,Validators,FormArray,FormBuilder,AbstractControl} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 @Component({
@@ -8,14 +8,14 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
- 
+
   submitted = false;
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
   });
 
-  constructor(private formBuilder: FormBuilder,private router:Router,public userService:UserService) {}
+  constructor(private formBuilder: FormBuilder, private router: Router, public userService: UserService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group(
@@ -33,25 +33,24 @@ export class LoginComponent implements OnInit {
     );
   }
 
-register(){
-  this.router.navigate(['register'])
-}
+  register() {
+    this.router.navigate(['register'])
+  }
 
-  onSubmit(){
+  onSubmit() {
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
     }
-    
     const result = this.userService.logInUser(this.loginForm.value)
-        if(result){
-          this.userService.setLoginStatus(result.id);
-          this.router.navigate(['/dashboard']);
-        }
-        else{
-          alert('Username or password incorrect!')
-        }
+    if (result) {
+      this.userService.setLoginStatus(result.id);
+      this.router.navigate(['/dashboard']);
     }
+    else {
+      alert('Username or password incorrect!')
+    }
+  }
 
   get f(): { [key: string]: AbstractControl } {
     return this.loginForm.controls;
