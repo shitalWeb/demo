@@ -17,18 +17,18 @@
 
 
 <div class="side-nav">
-    <ng-template #content let-offcanvas class="side-wrapper">
+    <ng-template #content let-offcanvas class="side-wrapper" id="myOffcanvas">
         
         <div class="offcanvas-header">
             <h4 class="offcanvas-title" id="offcanvas-basic-title">AdminKit</h4>
-            <i class="fa fa-bars"  (click)="offcanvas.dismiss('Cross click')"></i>
+            <i class="fa fa-bars"  (click)="close(content)"></i>
         </div>
         <div class="offcanvas-body">
             <ul>
-            <li (click)="navigation('dashboard');">
+            <li (click)="navigation('dashboard',content);">
                 Dashboard
             </li>
-            <li (click)="navigation('contact');">
+            <li (click)="navigation('contact',content);">
                 Contacts
             </li>
             </ul>
@@ -36,7 +36,7 @@
         </ng-template>
 </div>
 
-<div class="main-content">
+<div class="main-content"  [ngClass]="{'side-nav-open': sidenav,'side-nav-close':!sidenav}">
     <ng-content></ng-content>
 </div>
 
@@ -52,7 +52,7 @@
                     <li>
                         About Us
                     </li>
-                    <li (click)="navigation('contact')">
+                    <li (click)="navigation('contact',content)">
                         Contact Us
                     </li>
                 </ul>

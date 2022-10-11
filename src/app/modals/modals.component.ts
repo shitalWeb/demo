@@ -10,6 +10,7 @@ import { UserService } from '../services/user/user.service';
 export class ModalsComponent implements OnInit {
   closeResult = '';
   userName="";
+  sidenav=false;
   constructor(private offCanvasService: NgbOffcanvas,private router:Router,private userService: UserService) { }
 
   ngOnInit(): void {
@@ -17,7 +18,14 @@ export class ModalsComponent implements OnInit {
   }
 
   open(content:any) {
-      this.offCanvasService.open(content, { backdrop: false,backdropClass:'custome' });
+    this.sidenav=true;
+    this.offCanvasService.open(content, { backdrop: false,backdropClass:'custome' });
+  }
+  
+  close(reasone:any){
+    this.sidenav=false;
+    this.offCanvasService.dismiss((reasone)={
+    });
   }
 
   logOut(){
@@ -25,17 +33,18 @@ export class ModalsComponent implements OnInit {
     if (!loginData) this.router.navigate(['login'])
   }
 
-  navigation(data:string){
+  navigation(data:string,content:any){
     this.router.navigate([data]);
-    this.offCanvasService.dismiss('Cross click')
+   this.close(content);
   }
-
+  
   private getDismissReason(reason: any): string {
     if (reason === OffcanvasDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === OffcanvasDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on the backdrop';
     } else {
+      console.log('no')
       return `with: ${reason}`;
     }
   }

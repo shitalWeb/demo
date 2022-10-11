@@ -48,29 +48,20 @@ export class ContactComponent implements OnInit {
     if (this.contactForm.invalid) {
       return;
     }
-    console.log(this.contactForm.invalid)
     this.contactForm.value.profileimg=this.contactForm.controls['profileimg'].value;
     if(this.edit_id!==""){
-      this.userService.editContact({...this.contactForm.value,id:this.edit_id,userid:this.userService.LoginStatus()}).then((result:any) => {
+      const result=this.userService.editContact({...this.contactForm.value,id:this.edit_id,userid:this.userService.LoginStatus()});
         if(result){
           this.getContactData();
           this.closePopup();
         }
-      })
-      .catch((error:any) => {
-      })
     }
     else{
-      console.log('1')
-      this.userService.addContact({...this.contactForm.value,id:uuidv4(),userid:this.userService.LoginStatus()}).then((result:any) => {
-        console.log(result)
+      const result=this.userService.addContact({...this.contactForm.value,id:uuidv4(),userid:this.userService.LoginStatus()});
           if(result){
             this.getContactData();
             this.closePopup();
-          }
-        })
-        .catch((error:any) => {
-        })
+      }
     }
   }
 

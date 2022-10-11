@@ -22,7 +22,7 @@
                 <td> {{contact.name}}</td>
                 <td>{{contact.email}}</td>
                 <td>{{contact.phoneno}}</td>
-                <td><img height="30" width="100" [src]="'contact.profileimg' || '/assets/Image/user.png'"
+                <td><img height="100" width="100" [src]="contact.profileimg || '/assets/Image/user.png'"
                     onError="this.src='/assets/Image/user.png'" /></td>
                 <td>
                   <button class="btn btn-primary" type="button" (click)="editData(contact,content)">Edit</button>
