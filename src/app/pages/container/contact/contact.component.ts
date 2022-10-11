@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {FormGroup,FormControl,Validators,FormArray,FormBuilder,AbstractControl} from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
 import { ManagedataService } from 'src/app/services/managedata/managedata.service';
 import { v4 as uuidv4 } from 'uuid';
+import * as XLSX from 'xlsx';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -21,10 +23,17 @@ export class ContactComponent implements OnInit {
   });
   edit_id='';
   delete_id='';
+  @ViewChild('table')table:any= ElementRef;
+  exportActive:boolean = false;
+  spinnerEnabled = false;
+  keys:any;
+  dataSheet = new Subject();
+  @ViewChild('inputFile') inputFile:any= ElementRef;
+  isExcelFile=false;
   
   constructor(private modalService: NgbModal,private formBuilder: FormBuilder,private userService:UserService,private manageDataService:ManagedataService) { }
-
-  ngOnInit(): void {
+ 
+   ngOnInit(): void {
     this.contactForm = this.formBuilder.group(
       {
         name: ['', [Validators.required]],
@@ -40,6 +49,65 @@ export class ContactComponent implements OnInit {
     this.getContactData()
   }
 
+  export()
+  {
+    this.exportActive = true;
+    const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, 'contact.xlsx');
+  }
+
+  onChange(evt:any) {
+    let data:any, header;
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    this.isExcelFile = !!target.files[0].name.match(/(.xls|.xlsx)/);
+    if (target.files.length > 1) {
+      this.inputFile.nativeElement.value = '';
+    }
+    if (this.isExcelFile) {
+      this.spinnerEnabled = true;
+      const reader: FileReader = new FileReader();
+      reader.onload = (e: any) => {
+        const bstr: string = e.target.result;
+        const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+        const wsname: string = wb.SheetNames[0];
+        const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+        data = XLSX.utils.sheet_to_json(ws);
+      };
+      reader.readAsBinaryString(target.files[0]);
+      reader.onloadend = (e) => {
+        this.spinnerEnabled = false;
+        this.keys = Object.keys(data[0]);
+        this.dataSheet.next(data);
+        for(var i=0;i<data.length;i++){
+          console.log(data[i].Name)
+          const contactData={
+            name:data[i].Name,
+            email:data[i].Email,
+            phoneno:data[i].PhoneNo,
+            profileimg:'',
+            id:uuidv4(),
+            userid:this.userService.LoginStatus()
+          }
+          const result=this.userService.addContact(contactData);
+          if(result){
+            this.getContactData();
+            this.closePopup();
+          }
+        }
+      }
+    } else {
+      this.inputFile.nativeElement.value = '';
+    }
+  }
+  
+  removeData() {
+    this.inputFile.nativeElement.value = '';
+    this.dataSheet.next(null);
+    this.keys = null;
+  }
+  
   onSubmit(){
     this.submitted = true;
     if (this.contactForm.invalid) {

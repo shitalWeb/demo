@@ -4,14 +4,19 @@
       <div class="row home-box">
         <h1 class="col-md-12">Contact </h1>
         <button class="btn btn-lg btn-outline-primary col-md-2 btn-add" (click)="open(content)">Add</button>
+        <button class="btn btn-lg btn-outline-primary col-md-2 btn-export" (click)="export()">Export</button>
+        <!-- <button class="btn btn-lg btn-outline-primary col-md-2 btn-export" (click)="import()">Import</button> -->
+          
+        <input type="file" (change)="onChange($event)" #inputFile />
+         <button (click)="removeData()">Remove Data</button>
         <div class="card col-xs-12 col-sm-12 col-md-12 col-md-offset-2 col-sm-offset-1">
-          <table class="table table-striped">
+          <table class="table table-striped"  #table>
             <thead>
               <tr>
                 <th scope="col">No</th>
                 <th scope="col" sortable="name">Name</th>
                 <th scope="col" sortable="area">Email</th>
-                <th scope="col" sortable="population">Phone Number</th>
+                <th scope="col" sortable="population">PhoneNo</th>
                 <th scope="col" sortable="population">Profile pic</th>
                 <th scope="col">Action</th>
               </tr>

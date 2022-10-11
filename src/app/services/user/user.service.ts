@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 import { CookieService } from 'ngx-cookie-service';
 import { ManagedataService } from '../managedata/managedata.service';
-import { ConstantPool } from '@angular/compiler';
 @Injectable({
   providedIn: 'root'
 })
