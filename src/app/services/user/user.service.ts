@@ -63,22 +63,18 @@ export class UserService {
   }
 
   editContact(contactData:any) {
-    const data= this.managedataService.getAppdata().contacts||[];
-    const editData = data.map((contact:any) => {
-      if (contact.id === contactData.id) {
-        contact = contactData;
-      }
-      return contact;
-    });
-   this.managedataService.editContactdata(editData);
+    let data= this.managedataService.getAppdata().contacts||[];
+    const findData = data.findIndex((contact:any)=> contact.id===contactData.id);
+    data[findData]=contactData;
+   this.managedataService.editContactdata(data);
    return this.managedataService.getContactData(this.LoginStatus());
-
   }
 
   deleteContact(contactData:any) {
-    const data= this.managedataService.getAppdata().contacts||[];
-    const deleteData = data.filter((contact:any)=> contact.id!==contactData.id);
-   this.managedataService.deleteContactdata(deleteData);
+    let data= this.managedataService.getAppdata().contacts||[];
+    const deleteData = data.findIndex((contact:any)=> contact.id===contactData.id);
+    data.splice(deleteData,1);
+   this.managedataService.deleteContactdata(data);
    return this.managedataService.getContactData(this.LoginStatus());
   }
 }
