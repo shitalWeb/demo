@@ -12,24 +12,24 @@ import { Subject } from 'rxjs';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
+  @ViewChild('table')table:any= ElementRef;
+  @ViewChild('inputFile') inputFile:any= ElementRef;
   closeResult = '';
   submitted=false;
   contactList:any=[];
+  edit_id='';
+  delete_id='';
+  exportActive:boolean = false;
+  spinnerEnabled = false;
+  keys:any;
+  dataSheet = new Subject();
+  isExcelFile=false;
   contactForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     email: new FormControl(''),
     phoneno: new FormControl(''),
     image: new FormControl('')
   });
-  edit_id='';
-  delete_id='';
-  @ViewChild('table')table:any= ElementRef;
-  exportActive:boolean = false;
-  spinnerEnabled = false;
-  keys:any;
-  dataSheet = new Subject();
-  @ViewChild('inputFile') inputFile:any= ElementRef;
-  isExcelFile=false;
   
   constructor(private modalService: NgbModal,private formBuilder: FormBuilder,private userService:UserService,private manageDataService:ManagedataService) { }
  
@@ -107,7 +107,7 @@ export class ContactComponent implements OnInit {
     this.dataSheet.next(null);
     this.keys = null;
   }
-  
+
   onSubmit(){
     this.submitted = true;
     if (this.contactForm.invalid) {

@@ -2,13 +2,18 @@
   <div class="home">
     <div class="home-wrapper">
       <div class="row home-box">
-        <h1 class="col-md-12">Contact </h1>
-        <button class="btn btn-lg btn-outline-primary col-md-2 btn-add" (click)="open(content)">Add</button>
-        <button class="btn btn-lg btn-outline-primary col-md-2 btn-export" (click)="export()">Export</button>
-        <!-- <button class="btn btn-lg btn-outline-primary col-md-2 btn-export" (click)="import()">Import</button> -->
+        <h1 class="col-md-2">Contact </h1>
+        <div class="table-header col-md-10">
+          <button class="btn btn-lg btn-outline-primary " (click)="open(content)">Add</button>
+          <button class="btn btn-lg btn-outline-primary" (click)="export()">Export</button>
+          <div class="file-input">
+              <button class="btn btn-lg btn-outline-primary ">Import</button>
+              <input type="file" (change)="onChange($event)" #inputFile />
+          </div>
           
-        <input type="file" (change)="onChange($event)" #inputFile />
-         <button (click)="removeData()">Remove Data</button>
+          <button class="btn btn-lg btn-outline-primary "(click)="removeData()">Remove Data</button>
+        </div>
+       
         <div class="card col-xs-12 col-sm-12 col-md-12 col-md-offset-2 col-sm-offset-1">
           <table class="table table-striped"  #table>
             <thead>

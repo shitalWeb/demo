@@ -9,21 +9,28 @@
     &-box {
         width: 100%;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         position: relative;
-        .card {
-                
-        }
-
+        display: flex;
         h1 {
-            text-align: center;
             font-weight: bold;
             margin-bottom: 20px;
         }
-        .btn-add{
-            position: absolute;
-            top:0 ;
-            right: 0;
+        .table-header{
+            
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .file-input{
+                margin-bottom: 0;
+                height: auto;
+                width: auto;
+                cursor: pointer;
+            }
+            input{
+                height: 100%;
+                width: 100%;
+            }
         }
     }
 
