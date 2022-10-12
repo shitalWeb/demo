@@ -21,8 +21,8 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            .file-input{
-                margin-bottom: 0;
+            .file-input{        
+                margin-bottom: 0;   
                 height: auto;
                 width: auto;
                 cursor: pointer;
@@ -33,7 +33,11 @@
             }
         }
     }
-
+    .profileImg{
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+    }
 }
 .del-btn{
     margin-left:10px ;

@@ -9,8 +9,26 @@
     &-box {
         width: 100%;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         position: relative;
-
+        display: flex;
+        h1 {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .card{
+            padding: 0px 10px;
+            p{
+                margin-bottom: 0px;
+                padding: 5px;
+                font-size: 12px;
+            }
+            p:last-child {
+                padding-top: 0px;
+                font-weight: bold;
+            }
+        }
     }
 }
+
+

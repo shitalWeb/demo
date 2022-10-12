@@ -3,12 +3,49 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+.btn{
+    font-size: 14px;
+    padding: 10px;
+}
+.dropdown-menu{
+    padding: 0px;
+}
+.dropdown-toggle:active{
+    border: none;
+}
+.table-striped > tbody > tr:nth-of-type(odd) > *{
+    --bs-table-accent-bg:none;
+}
+.table-striped > tbody > tr{
+    font-size: 14px;
+    vertical-align: middle;
+}
+.card{
+    box-shadow:0px 0px 6px 2px rgb(0 0 0 / 19%);
+    border: none;
+}
+.form-group{
+    label{
+        font-size: 12px;
+        margin: 10px 0px;
+    }
+    .form-control{
+        border-radius:4px;
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    .form-control:focus{
+        box-shadow: none ;
+        transform: 2s;
+    }
+}
 .offcanvas{
     width: 230px!important;
     background-color: #1E1E2D;  
     color:#ffffff;
     .offcanvas-header{
         border:1px solid #2D2D43;
+        padding:8px 10px;
         i{
             font-size: 24px;
             cursor: pointer;
@@ -21,8 +58,9 @@
         margin: 0;
         padding: 0px;
         li{
-            padding: 15px 20px;
+            padding: 10px 20px;
             cursor: pointer;
+            font-size: 14px;
         }
         li:hover{
             background-color: #2C2C41;
