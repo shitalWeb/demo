@@ -13,10 +13,14 @@
 .dropdown-toggle:active{
     border: none;
 }
+.table{
+    margin-bottom:0 ;
+}
 .table-striped > tbody > tr:nth-of-type(odd) > *{
     --bs-table-accent-bg:none;
 }
-.table-striped > tbody > tr{
+.table > :not(caption) > * > * {
+
     font-size: 14px;
     vertical-align: middle;
 }
