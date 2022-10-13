@@ -39,10 +39,12 @@
             &-del{
                 font-size: 20px;
                 color: red;
+                cursor: pointer;
             }
             &-edit{
                 font-size: 20px;
                 margin-right: 15px;
+                cursor: pointer;
             }
         }
     }
@@ -73,6 +75,5 @@
     }
 }
 .btn-submit-dialog{
-    position: absolute;
-    bottom: -55px;
+   width: 100%;
 }
