@@ -2,12 +2,12 @@
   <div class="home">
     <div class="home-wrapper">
       <div class="row home-box">
-        <h4 class="col-md-2">Contact </h4>
-        <div class="table-header col-md-10">
+        <h4 class="col-md-10">Contact </h4>
+        <div class="table-header col-md-2">
 
           <button class="btn btn-lg btn-outline-primary " (click)="open(content)">Add</button>
           <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-            <button type="button" class="btn " ngbDropdownToggle><i class="fa fa-ellipsis-h"></i></button>
+            <button type="button" class="btn " ngbDropdownToggle><i class="fa fa-ellipsis-v" style="font-size:24px;"></i></button>
             <div class="dropdown-menu" ngbDropdownMenu>
               <button ngbDropdownItem (click)="export()">Export</button>
               <div class="file-input">
@@ -37,11 +37,10 @@
                   </td>
                 <td> {{contact.name}}</td>
                 <td>{{contact.email}}</td>
-                <td>{{contact.phoneno}}</td>
+                <td>{{contact.phoneno  | phone}}</td>
                 <td>
-                  <button class="btn btn-primary" type="button" (click)="editData(contact,content)">Edit</button>
-                  <button type="button" class=" del-btn btn btn-outline-dark"
-                    (click)="deleteData(contact,delete);">Delete</button>
+                  <i class="fa-icon-edit fa fa-pencil-square-o" aria-hidden="true" (click)="editData(contact,content)"></i>
+                  <i class="fa-icon-del fa fa-trash" aria-hidden="true"  (click)="deleteData(contact,delete);"></i>
                 </td>
               </tr>
             </tbody>

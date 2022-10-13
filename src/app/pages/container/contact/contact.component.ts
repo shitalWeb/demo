@@ -6,6 +6,24 @@ import { ManagedataService } from 'src/app/services/managedata/managedata.servic
 import { v4 as uuidv4 } from 'uuid';
 import * as XLSX from 'xlsx';
 import { Subject } from 'rxjs';
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'phone',
+})
+export class PhonePipe {
+  transform(rawNum: string) {
+    rawNum = '+91' + rawNum;
+
+    const countryCodeStr = rawNum.slice(0, 3);
+    const areaCodeStr = rawNum.slice(3, 7);
+    const midSectionStr = rawNum.slice(7, 10);
+    const lastSectionStr = rawNum.slice(10);
+
+    return `${countryCodeStr} (${areaCodeStr})${midSectionStr}-${lastSectionStr}`;
+  }
+}
+
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',

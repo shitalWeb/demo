@@ -14,7 +14,10 @@
     border: none;
 }
 .dropdown:focus-visible {
-    outline: none;
+    outline: 0;
+}
+.dropdown-toggle::after{
+    content: none;
 }
 .table{
     margin-bottom:0 ;
