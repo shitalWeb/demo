@@ -9,8 +9,8 @@
         justify-content: center;
         width: 100%;
     }
-    &-left{
-        width: 50%;
+    &-container{
+        align-items: center;
         h1{
             color: #0d6efd;
             text-align: center;
@@ -19,15 +19,12 @@
             font-size: 14px;
             text-align: center;
             color: #666666;
-
+    
         }
         img{
             width: 100%;
             height: 100%;
         }
-    }
-    &-right{
-        width: 50%;
     }
     &-box {
         width: 100%;
