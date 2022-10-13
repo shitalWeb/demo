@@ -13,6 +13,9 @@
 .dropdown-toggle:active{
     border: none;
 }
+.dropdown:focus-visible {
+    outline: none;
+}
 .table{
     margin-bottom:0 ;
 }

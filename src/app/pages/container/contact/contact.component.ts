@@ -95,6 +95,7 @@ export class ContactComponent implements OnInit {
             this.closePopup();
           }
         }
+        this.removeData()
       }
     } else {
       this.inputFile.nativeElement.value = '';

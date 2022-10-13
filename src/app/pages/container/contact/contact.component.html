@@ -4,13 +4,18 @@
       <div class="row home-box">
         <h4 class="col-md-2">Contact </h4>
         <div class="table-header col-md-10">
+
           <button class="btn btn-lg btn-outline-primary " (click)="open(content)">Add</button>
-          <button class="btn btn-lg btn-outline-primary" (click)="export()">Export</button>
-          <div class="file-input">
-              <button class="btn btn-lg btn-outline-primary ">Import</button>
-              <input type="file" (change)="onChange($event)" #inputFile />
+          <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn " ngbDropdownToggle><i class="fa fa-ellipsis-h"></i></button>
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <button ngbDropdownItem (click)="export()">Export</button>
+              <div class="file-input">
+                <button ngbDropdownItem >Import</button>
+                <input type="file" (change)="onChange($event)" #inputFile />
+            </div>
+            </div>
           </div>
-          <button class="btn btn-lg btn-outline-primary "(click)="removeData()">Remove Data</button>
         </div>
        
         <div class="card col-xs-12 col-sm-12 col-md-12 col-md-offset-2 col-sm-offset-1">
